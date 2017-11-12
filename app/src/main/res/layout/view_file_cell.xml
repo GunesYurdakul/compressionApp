@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="horizontal" android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:weightSum="1">
+
+
+    <ImageView
+        android:id="@+id/miniPP"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_weight="0.01"
+        android:background="@drawable/circle"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"/>
+
+    <LinearLayout
+        style="@style/FormElement"
+        android:orientation="vertical"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:layout_weight="0.9"
+        >
+        <TextView
+            android:id="@+id/file_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="file"
+            android:textColor="@color/orange"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+        <TextView
+            android:id="@+id/sender"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:text="@string/username"
+            android:textColor="@android:color/background_dark"
+            android:textSize="16sp"
+            />
+
+        <TextView
+            android:id="@+id/date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="date"
+            android:textColor="@android:color/background_dark"
+            android:textSize="16sp"
+            />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/download"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:layout_weight="0.1"
+        android:background="@mipmap/download"
+        android:layout_gravity="center" />
+
+
+</LinearLayout>
