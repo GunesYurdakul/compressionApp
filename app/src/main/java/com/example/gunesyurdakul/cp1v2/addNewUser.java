@@ -89,9 +89,6 @@ public class addNewUser extends Fragment implements View.OnClickListener{
 
 
 
-//                if(singleton.userMap.get(userName.getText().toString())!=null){
-//                    warning.setText("This id already exists!");
-//                }
                 if(name.getText().toString().trim().length()==0){
                     warning.setText("Name field is blank!");
                 }

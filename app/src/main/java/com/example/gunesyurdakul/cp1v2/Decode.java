@@ -1,5 +1,4 @@
 package com.example.gunesyurdakul.cp1v2;
-
 import java.util.*;
 
 public class Decode {
@@ -7,9 +6,9 @@ public class Decode {
     private String decompressedText;
     private int bitSize;
     private Node huffmanTree;
-    private HashMap<Character, Integer> frequencies;
+    private LinkedHashMap<Character, Integer> frequencies;
 
-    Decode(byte[] compressedText, int bitSize, HashMap<Character, Integer> frequencies) {
+    Decode(byte[] compressedText, int bitSize, LinkedHashMap<Character, Integer> frequencies) {
         this.compressedText = compressedText.clone();
         this.bitSize = bitSize;
         this.frequencies = frequencies;
@@ -36,18 +35,26 @@ public class Decode {
                     return -1;
                 else if (n1.getFrequency() > n2.getFrequency())
                     return 1;
-                else
-                    return 0;
+                else {
+                    if (n1.getLetter() < n2.getLetter())
+                        return -1;
+                    else if (n1.getLetter() > n2.getLetter())
+                        return 1;
+                    else
+                        return 0;
+                }
             }
-        } );
+        });
+
         while (q.size() > 1) {
             Node left = q.get(0);
             q.remove(0);
             Node right = q.get(0);
             q.remove(0);
 
-            n = new Node('\0', left.getFrequency() + right.getFrequency(), left, right);
+            n = new Node(left.getLetter(), left.getFrequency() + right.getFrequency(), left, right);
             q.add(n);
+
             Collections.sort(q, new Comparator<Node>() {
                 @Override
                 public int compare(Node n1, Node n2) {
@@ -55,10 +62,16 @@ public class Decode {
                         return -1;
                     else if (n1.getFrequency() > n2.getFrequency())
                         return 1;
-                    else
-                        return 0;
+                    else {
+                        if (n1.getLetter() < n2.getLetter())
+                            return -1;
+                        else if (n1.getLetter() > n2.getLetter())
+                            return 1;
+                        else
+                            return 0;
+                    }
                 }
-            } );
+            });
         }
 
         huffmanTree = q.get(0);
@@ -71,10 +84,9 @@ public class Decode {
                 bits[i] = true;
         }
         Node n = huffmanTree;
-        //i=1
-        for(int i = 0 ; i < bitSize; i++){
+        for(int i = 0; i < bitSize; i++){
             if(!bits[i]){
-                if(n.getLeft().getLetter() != '\0'){
+                if(n.getLeft().getLeft() == null && n.getLeft().getRight() == null){
                     decompressedText += n.getLeft().getLetter();
                     n = huffmanTree;
                 }
@@ -82,7 +94,7 @@ public class Decode {
                     n = n.getLeft();
             }
             else {
-                if(n.getRight().getLetter() != '\0'){
+                if(n.getRight().getLeft() == null && n.getRight().getRight() == null){
                     decompressedText += n.getRight().getLetter();
                     n = huffmanTree;
                 }

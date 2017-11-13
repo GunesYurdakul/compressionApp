@@ -1,5 +1,4 @@
 package com.example.gunesyurdakul.cp1v2;
-
 import java.util.*;
 
 import static java.lang.Math.pow;
@@ -66,10 +65,16 @@ public class Encode {
                     return -1;
                 else if (n1.getFrequency() > n2.getFrequency())
                     return 1;
-                else
-                    return 0;
+                else {
+                    if (n1.getLetter() < n2.getLetter())
+                        return -1;
+                    else if (n1.getLetter() > n2.getLetter())
+                        return 1;
+                    else
+                        return 0;
+                }
             }
-        } );
+        });
 
         while (q.size() > 1) {
             Node left = q.get(0);
@@ -77,29 +82,35 @@ public class Encode {
             Node right = q.get(0);
             q.remove(0);
 
-            n = new Node('\0', left.getFrequency() + right.getFrequency(), left, right);
+            n = new Node(left.getLetter(), left.getFrequency() + right.getFrequency(), left, right);
             q.add(n);
 
-        Collections.sort(q, new Comparator<Node>() {
-            @Override
-            public int compare(Node n1, Node n2) {
-                if (n1.getFrequency() < n2.getFrequency())
-                    return -1;
-                else if (n1.getFrequency() > n2.getFrequency())
-                    return 1;
-                else
-                    return 0;
-            }
-        } );
+            Collections.sort(q, new Comparator<Node>() {
+                @Override
+                public int compare(Node n1, Node n2) {
+                    if (n1.getFrequency() < n2.getFrequency())
+                        return -1;
+                    else if (n1.getFrequency() > n2.getFrequency())
+                        return 1;
+                    else {
+                        if (n1.getLetter() < n2.getLetter())
+                            return -1;
+                        else if (n1.getLetter() > n2.getLetter())
+                            return 1;
+                        else
+                            return 0;
+                    }
+                }
+            });
         }
+
         huffmanTree = q.get(0);
     }
-
 
     public void generateHuffmanCodes(Node n, ArrayList<Boolean> code) {
         if (n == null)
             return;
-        if (n.getLetter() != '\0') {
+        if (n.getLeft() == null && n.getRight() == null) {
             ArrayList<Boolean> c = new ArrayList<>(code);
             codeTable.put(n.getLetter(), c);
         } else {
