@@ -9,4 +9,5 @@ At the android device the users and files are sent to server by HTTP POST reques
 
 Huffman Coding Algorithm is a kind of text based compression algorithm that has the complexity of O(n*logn) [Cornen 2009]. That algorithm uses tree including binary numbered elements holding the characters of a string and heap functions. Huffman coding algorithm is different than the other compression algorithms on account of those characteristics. Furthermore, Huffman Coding algorithm generally causes no loss of data [Cornen 2009]. When using Huffman Coding, each character in a 30-character alphabet can be encoded with average 6 bits; even though, character size is 16 bits in java.
 
-Git url of server code: https://github.com/GunesYurdakul/compressionApp.git
+Git url of server code: https://github.com/ozanAta/ataozHcoder.git
+
